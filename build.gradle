@@ -1,0 +1,84 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.java.anita'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.7.2'
+
+
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.20.1'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.18.0'
+    //testImplementation 'io.cucumber:cucumber-testng:7.20.1'
+
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+    implementation group: 'org.json', name: 'json', version: '20240303'
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.5.0'
+    testImplementation group: 'io.rest-assured', name: 'json-path', version: '5.3.0'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version :'3.24.0'
+
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
+    //testImplementation group: 'org.testng', name: 'testng', version: '7.9.0'
+
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+def tags = (findProperty('tags') == null) ? 'not @exclude' : findProperty('tags') + ' and not @exclude'
+
+tasks.register('apirun') {
+    description("Running Test api")
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'html:reports/api/index.html',
+                    '--plugin', 'json:reports/api/index.json',
+                    '--plugin', 'pretty',
+                    '--glue', 'com.anita.API',
+                    '--tags', "${tags}",
+                    'src/test/resources/ApiFeature'
+            ]
+        }
+    }
+
+}
+
+tasks.register('webrun') {
+    description("Running Test Web")
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'html:reports/web/index.html',
+                    '--plugin', 'json:reports/web/index.json',
+                    '--plugin', 'pretty',
+                    '--glue', 'com.anita.Web',
+                    '--tags', "${tags}",
+                    'src/test/resources/WebFeature'
+            ]
+        }
+    }
+}
