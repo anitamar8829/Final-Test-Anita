@@ -5,7 +5,7 @@ Feature: Signup
   @signup-new-user
   Scenario: [Postive] signup create new user
     Given open web demoblaze signup
-    And user input new username with "RandomName51"
+    And user input new username with "RandomName53"
     And user input new password with "randompass"
     And user click signup button
     Then user get confirmation message "Sign up successful."
