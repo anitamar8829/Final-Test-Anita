@@ -24,10 +24,10 @@ jobs:
         distribution: 'temurin'
 
     # Step 3: Install Chrome
-    - name: Set up Chrome 130
+    - name: Set up Chrome 131
       uses: browser-actions/setup-chrome@v1.7.2
       with:
-        version: '130'
+        version: '131'
 
     # Step 4: Make Gradle Wrapper executable
     - name: Make Gradle Wrapper Executable
