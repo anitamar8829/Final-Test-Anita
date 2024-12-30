@@ -1,10 +1,10 @@
 **FINAL PROJECT: Automation Test for Web UI and API**
-This repository contains the Implementation of Final Project Automation Testing, focusing on Web UI and API testing. It demonstrates how to create automated tests using modern tools and frameworks for robust and reliable software validation.
+<br>This repository contains the Implementation of Final Project Automation Testing, focusing on Web UI and API testing. It demonstrates how to create automated tests using modern tools and frameworks for robust and reliable software validation.
 
 **Features**
-Web UI Tests: Automated test scenarios for user interactions on Demoblaze. Validations for critical workflows like cart management and order placement.
+<br>Web UI Tests: Automated test scenarios for user interactions on Demoblaze. Validations for critical workflows like cart management and order placement.
 
-API Tests: Automated API tests for GoRest endpoints. Validations for CRUD operations.
+<br>API Tests: Automated API tests for GoRest endpoints. Validations for CRUD operations.
 
 BDD Implementation: Gherkin syntax to define test scenarios. Easy-to-read and maintain test cases for both technical and non-technical stakeholders.
 
