@@ -1,4 +1,4 @@
-** FINAL PROJECT: Automation Test for Web UI and API**
+**FINAL PROJECT: Automation Test for Web UI and API**
 This repository contains the Implementation of Final Project Automation Testing, focusing on Web UI and API testing. It demonstrates how to create automated tests using modern tools and frameworks for robust and reliable software validation.
 
 **Features**
